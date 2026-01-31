@@ -1,0 +1,16 @@
+1. Veritabanını Senkronize Et (Stamp)
+Bu komut veritabanına gidip "Tamam, senin şu anki halin en son versiyondur" diye bir damga vurur.
+
+alembic stamp head
+
+2. Migration İşlemini Tekrarla
+Şimdi yeni db için aşağıdaki komutu çalıştır: alembic revision --autogenerate -m "yeni_degisiklik_aciklamasi"
+
+
+3. Değişikliği Uygula
+Ve son olarak oluşturulan dosyayı veritabanına fiziksel olarak işle: alembic upgrade head
+
+"Stamp" Ne Zaman Kullanılır?
+Eğer migration dosyaların silindiyse veya veritabanını manuel olarak bir şekilde değiştirdiysen, Alembic'in kafası karışır.
+
+stamp head komutu, koddaki versiyon ile veritabanındaki versiyonu "zorla" birbirine eşitler.
