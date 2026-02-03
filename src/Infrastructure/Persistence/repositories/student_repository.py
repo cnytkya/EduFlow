@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from src.Infrastructure.Persistence.models import StudentModel
+from src.Infrastructure.Persistence.models import AttendanceModel, StudentModel
 from src.Domain.Entities.student import Student
 from src.Application.Interfaces.istudent_repository import IStudentRepository
 
@@ -21,3 +21,11 @@ class StudentRepository(IStudentRepository):
     
     def get_all(self):
         return self.db.query(StudentModel).all()
+    
+    def add_attendance(self, attendance_model:AttendanceModel):
+        # burada doğrudan veritabanı modelini alıyoruz çünkü alt yapıyı domaindeki Attendance üzerinden kuracağız.
+        self.db.add(attendance_model)
+        self.db.commit()
+        self.db.refresh(attendance_model)
+        return attendance_model
+    

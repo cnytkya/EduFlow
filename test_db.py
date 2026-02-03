@@ -1,6 +1,6 @@
 # from src.Infrastructure.Persistence.db_manager import seedData
 from src.Infrastructure.Persistence.db_manager import SessionLocal, seedData
-from src.Infrastructure.Persistence.student_repository import StudentRepository
+from Infrastructure.Persistence.repositories.student_repository import StudentRepository
 from src.Application.services.student_service import StudentService
 
 def run_test():

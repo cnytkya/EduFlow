@@ -1,5 +1,5 @@
 # gerekli malzemeleri tezgahın üzerine koyalım.
-from src.Infrastructure.Persistence.student_repository import StudentRepository
+from Infrastructure.Persistence.repositories.student_repository import StudentRepository
 from src.Domain.Entities.student import Student
 
 class StudentService:

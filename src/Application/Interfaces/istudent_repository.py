@@ -10,6 +10,4 @@ class IStudentRepository(ABC):
     def get_all(self):
         pass
     
-    # @abstractmethod
-    # def get_student_by_id(self, studentId: Student):
-    #     pass
+    
