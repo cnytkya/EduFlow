@@ -1,6 +1,6 @@
 # from src.Infrastructure.Persistence.db_manager import seedData
 from src.Infrastructure.Persistence.db_manager import SessionLocal, seedData
-from Infrastructure.Persistence.repositories.student_repository import StudentRepository
+from src.Infrastructure.Persistence.repositories.student_repository import StudentRepository
 from src.Application.services.student_service import StudentService
 
 def run_test():
@@ -12,9 +12,9 @@ def run_test():
         
         print("\n----Yeni Öğrenci Kaydı Başlatılıyor----")
         yeni_ogrenci = student_service.register_new_student(
-            first_name="Naziye",
-            last_name="Kara",
-            student_number="NUM123456"
+            first_name="Naziye22",
+            last_name="Kara22",
+            student_number="22NUM123456"
         )
         print(f"İşlem tamam! {yeni_ogrenci.first_name} veritabanına {yeni_ogrenci.id} ID numarasyla eklendi.")
     except Exception as e:

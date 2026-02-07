@@ -7,7 +7,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 # bir de sql server de boş bir veritabanı oluşturulsun. sonra veritabanına migrate ettiğimiz tabloları gönderelim.
 
 CONNECTION_STR = ( # r "(row string) kullanıyoruz ki ters slaşlar(\) hata vermesin"
-    r"mssql+pyodbc://@CUNEYT\LOCALHOST/EduFlowDB?driver=ODBC+Driver+17+for+SQL+Server&Trusted_Connection=yes" 
+    r"mssql+pyodbc://@CUNEYT\CUNEYT/EduFlowDB?driver=ODBC+Driver+17+for+SQL+Server&Trusted_Connection=yes" 
     #sql server de boş bir veritabanı adı
 )
 
