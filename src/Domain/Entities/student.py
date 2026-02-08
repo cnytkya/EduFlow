@@ -13,7 +13,7 @@ class Student:
         self.instructor_override = False # eğitmen müdahale etti mi?
         self.status_note = "" #Eğitmen notu
         
-        def check_certificate_status(self, max_absenteeism=5):
+    def check_certificate_status(self, max_absenteeism=5):
             """
             sertifika durumunu otomatik kontrol edecek. Eğer eğitmen müdahale etmediyse sistem karar verecek.
             """
@@ -23,6 +23,11 @@ class Student:
                 else:
                    self.is_eligible_for_certificate = False
             return self.is_eligible_for_certificate
+        
+    def add_attendance(self, max_absenteeism=5):
+        """Devamsızlığı bir artırır ve sertifika durumunu günceller."""
+        self.absenteeism_count += 1
+        self.check_certificate_status(max_absenteeism)    
                     
         
         

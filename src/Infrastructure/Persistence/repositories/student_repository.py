@@ -19,13 +19,20 @@ class StudentRepository(IStudentRepository):
         self.db.refresh(new_student)
         return new_student
     
-    def get_all(self):
+    def get_all_students(self):
         return self.db.query(StudentModel).all()
     
-    def add_attendance(self, attendance_model:AttendanceModel):
-        # burada doğrudan veritabanı modelini alıyoruz çünkü alt yapıyı domaindeki Attendance üzerinden kuracağız.
-        self.db.add(attendance_model)
-        self.db.commit()
-        self.db.refresh(attendance_model)
-        return attendance_model
+    def get_by_id(self, student_id: int):
+    # DB Modelini buluyoruz
+        return self.db.query(StudentModel).filter(StudentModel.id == student_id).first()
+
+    def update_absenteeism(self, student_id: int, count: int, is_eligible: bool):
+        student_model = self.get_by_id(student_id)
+        if student_model:
+            student_model.absenteeism_count = count
+            student_model.is_eligible_for_certificate = is_eligible
+            self.db.commit()
+            self.db.refresh(student_model)
+        return student_model
     
+

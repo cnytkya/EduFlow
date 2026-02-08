@@ -1,13 +1,12 @@
 from abc import ABC, abstractmethod
-from src.Domain.Entities.student import Student
 
 class IStudentRepository(ABC):
+    """Öğrenci verileri için bir şablon (sözleşme)"""
+    
     @abstractmethod
-    def add(self, student: Student):
+    def add(self, student):
         pass
     
     @abstractmethod
-    def get_all(self):
+    def get_all_students(self):
         pass
-    
-    

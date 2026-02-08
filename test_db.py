@@ -12,9 +12,9 @@ def run_test():
         
         print("\n----Yeni Öğrenci Kaydı Başlatılıyor----")
         yeni_ogrenci = student_service.register_new_student(
-            first_name="Naziye22",
-            last_name="Kara22",
-            student_number="22NUM123456"
+            first_name="Hamit2",
+            last_name="Karan2",
+            student_number="NUM13333"
         )
         print(f"İşlem tamam! {yeni_ogrenci.first_name} veritabanına {yeni_ogrenci.id} ID numarasyla eklendi.")
     except Exception as e:
