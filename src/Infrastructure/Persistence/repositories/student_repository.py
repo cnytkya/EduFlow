@@ -35,4 +35,15 @@ class StudentRepository(IStudentRepository):
             self.db.refresh(student_model)
         return student_model
     
+    def add_attendance_record(self, student_id: int, status: str):
+        """Attendance tablosuna yeni bir satır ekler."""
+        new_record = AttendanceModel(
+            student_id = student_id,
+            status = status
+            # date default olarak utcnow tanımlı olduğu için model onu otomatik olarak halleder.
+        )
+        self.db.add(new_record)
+        self.db.commit()
+        return new_record
+    
 

@@ -29,7 +29,7 @@ class StudentService:
         return self.repository.add(new_student_domain)
     
 
-    def mark_attendance_and_check_certificate(self, student_id: int):
+    def mark_attendance_and_check_certificate(self, student_id: int, status: str = "Gelmedi"):
         # 1. Veritabanından modeli çek
         student_model = self.repository.get_by_id(student_id)
         if not student_model:
@@ -46,14 +46,23 @@ class StudentService:
         student_domain.instructor_override = student_model.instructor_override
 
         # 3. Domain içindeki mantığı çalıştır (DRY)
-        student_domain.add_attendance()
+        student_domain.add_attendance() # Sayı +1 oldu, sertifika kontrol edildi.
 
-        # 4. Güncellenen veriyi DB'ye geri yaz
-        return self.repository.update_absenteeism(
+        # 4. Güncellenen veriyi DB'ye geri yaz. Student tablosundaki sayıları güncelle.
+        self.repository.update_absenteeism(
             student_id, 
             student_domain.absenteeism_count, 
             student_domain.is_eligible_for_certificate
         )
+    
+        # Attendance tablosuna tarihli log kaydı at.
+        self.repository.add_attendance_record(student_id, status)
+
+        return student_domain
+        
+
+
+    
         
         
     

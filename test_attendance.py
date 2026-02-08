@@ -8,7 +8,7 @@ def run_attendance_test():
         student_repo = StudentRepository(db)
         student_service = StudentService(student_repo)
         
-        student_id = 8
+        student_id = 5
         print(f"\n--- ID: {student_id} için yoklama işleniyor ---")
         
         updated_student = student_service.mark_attendance_and_check_certificate(student_id)
