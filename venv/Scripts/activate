@@ -35,7 +35,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\kayac\SmprTech\Haftasonu\ogrenciyonetimapp\EduFlow\venv"
+VIRTUAL_ENV="C:\Users\kayac\Smartpro\EduFlow\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

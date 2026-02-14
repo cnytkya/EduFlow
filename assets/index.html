@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 15px 15px 0 0;
+            padding: 25px 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 2px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header h1 i {
+            color: #667eea;
+            font-size: 28px;
+        }
+
+        .stats {
+            background: #f8f9fa;
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: flex;
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .student-grid {
+            background: white;
+            border-radius: 0 0 15px 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .search-bar {
+            margin-bottom: 25px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .search-bar input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .student-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .student-card:hover {
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+            border-color: #667eea;
+        }
+
+        .student-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .student-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 20px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .student-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .student-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .student-badges {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            background: #f8f9fa;
+        }
+
+        .badge.absent {
+            color: #e74c3c;
+        }
+
+        .badge.absent i {
+            color: #e74c3c;
+        }
+
+        .cert-status {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 4px 12px;
+            border-radius: 20px;
+        }
+
+        .cert-status.eligible {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .cert-status.eligible i {
+            color: #28a745;
+        }
+
+        .cert-status.not-eligible {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .cert-status.not-eligible i {
+            color: #dc3545;
+        }
+
+        .cert-status.in-progress {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .cert-status.in-progress i {
+            color: #ffc107;
+        }
+
+        .attendance-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 140px;
+            justify-content: center;
+        }
+
+        .attendance-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .attendance-btn:active {
+            transform: translateY(0);
+        }
+
+        .attendance-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            display: none;
+            align-items: center;
+            gap: 10px;
+            animation: slideUp 0.3s ease;
+            z-index: 1000;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .toast.success {
+            border-left: 4px solid #27ae60;
+        }
+
+        .toast.error {
+            border-left: 4px solid #e74c3c;
+        }
+
+        .toast .toast-icon {
+            font-size: 20px;
+        }
+
+        .toast.success .toast-icon {
+            color: #27ae60;
+        }
+
+        .toast.error .toast-icon {
+            color: #e74c3c;
+        }
+
+        .toast-message {
+            color: #333;
+            font-size: 14px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            color: #e0e0e0;
+            margin-bottom: 15px;
+        }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>
+                <i class="fas fa-graduation-cap"></i>
+                SmartPro Öğrenci Yoklama Sistemi
+            </h1>
+            <div class="stats" id="stats">
+                <div class="stat-item">
+                    <div class="stat-label">Toplam Öğrenci</div>
+                    <div class="stat-value" id="total-students">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Sertifika Almaya Hak</div>
+                    <div class="stat-value" id="eligible-count">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-label">Süreç Devam Ediyor</div>
+                    <div class="stat-value" id="in-progress-count">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="student-grid">
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Öğrenci ara..." onkeyup="filterStudents()">
+                <i class="fas fa-search" style="display: none;"></i>
+            </div>
+
+            <div id="student-list"></div>
+            <div id="loading" class="loading" style="display: none;">
+                <i class="fas fa-spinner fa-spin"></i> Yükleniyor...
+            </div>
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <i class="fas fa-user-graduate"></i>
+                <p>Henüz öğrenci bulunmuyor.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast">
+        <span class="toast-icon"><i class="fas fa-check-circle"></i></span>
+        <span class="toast-message"></span>
+    </div>
+
+    <script>
+        let students = [];
+        let filteredStudents = [];
+
+        function getCertificateStatus(absenteism) {
+            if (absenteism >= 6) {
+                return {
+                    text: '✗ Hak Kazanamadı',
+                    class: 'not-eligible',
+                    icon: 'fa-times-circle'
+                };
+            } else {
+                return {
+                    text: '⟳ Süreç Devam Ediyor',
+                    class: 'in-progress',
+                    icon: 'fa-clock'
+                };
+            }
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.className = `toast ${type}`;
+            
+            const icon = toast.querySelector('.toast-icon i');
+            if (type === 'success') {
+                icon.className = 'fas fa-check-circle';
+            } else {
+                icon.className = 'fas fa-exclamation-circle';
+            }
+            
+            toast.querySelector('.toast-message').textContent = message;
+            toast.style.display = 'flex';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        }
+
+        function showLoading(show = true) {
+            document.getElementById('loading').style.display = show ? 'block' : 'none';
+        }
+
+        function updateStats() {
+            document.getElementById('total-students').textContent = students.length;
+            
+            // 6 ve üzeri devamsızlığı olanlar hak kazanamaz
+            const eligibleCount = students.filter(s => s.absenteeism < 6).length;
+            document.getElementById('eligible-count').textContent = eligibleCount;
+            
+            // Süreç devam edenler (devamsızlığı 6'dan az olanlar)
+            const inProgressCount = students.filter(s => s.absenteeism < 6).length;
+            document.getElementById('in-progress-count').textContent = inProgressCount;
+        }
+
+        function filterStudents() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            
+            if (searchTerm.trim() === '') {
+                filteredStudents = [...students];
+            } else {
+                filteredStudents = students.filter(s => 
+                    s.name.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            renderStudentList();
+        }
+
+        function renderStudentList() {
+            const container = document.getElementById('student-list');
+            
+            if (filteredStudents.length === 0) {
+                document.getElementById('empty-state').style.display = 'block';
+                container.innerHTML = '';
+                return;
+            }
+
+            document.getElementById('empty-state').style.display = 'none';
+            
+            container.innerHTML = filteredStudents.map(s => {
+                const certStatus = getCertificateStatus(s.absenteeism);
+                
+                return `
+                <div class="student-card" id="card-${s.id}">
+                    <div class="student-info">
+                        <div class="student-avatar">
+                            ${s.name.charAt(0).toUpperCase()}
+                        </div>
+                        <div class="student-details">
+                            <span class="student-name">${s.name}</span>
+                            <div class="student-badges">
+                                <span class="badge absent">
+                                    <i class="fas fa-calendar-times"></i>
+                                    Devamsızlık: <span id="abs-${s.id}">${s.absenteeism}</span>
+                                </span>
+                                <span id="cert-container-${s.id}" class="cert-status ${certStatus.class}">
+                                    <i class="fas ${certStatus.icon}"></i>
+                                    <span id="cert-${s.id}">${certStatus.text}</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="attendance-btn" onclick="takeAttendance(${s.id})">
+                        <i class="fas fa-user-check"></i>
+                        Yoklama Al
+                    </button>
+                </div>
+            `}).join('');
+        }
+
+        async function loadStudents() {
+            showLoading(true);
+            try {
+                students = await pywebview.api.get_students();
+                filteredStudents = [...students];
+                updateStats();
+                renderStudentList();
+            } catch (error) {
+                showToast('Öğrenciler yüklenirken bir hata oluştu!', 'error');
+                console.error('Error loading students:', error);
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        async function takeAttendance(id) {
+            const button = event.target.closest('button');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> İşleniyor...';
+            button.disabled = true;
+
+            try {
+                const res = await pywebview.api.mark_attendance(id);
+                
+                if (res.success) {
+                    // Update UI
+                    document.getElementById(`abs-${id}`).innerText = res.absenteeism;
+                    
+                    // Update certificate status based on new absenteeism
+                    const certStatus = getCertificateStatus(res.absenteeism);
+                    const certContainer = document.getElementById(`cert-container-${id}`);
+                    const certSpan = document.getElementById(`cert-${id}`);
+                    
+                    certContainer.className = `cert-status ${certStatus.class}`;
+                    certContainer.innerHTML = `
+                        <i class="fas ${certStatus.icon}"></i>
+                        <span id="cert-${id}">${certStatus.text}</span>
+                    `;
+                    
+                    // Update student data
+                    const student = students.find(s => s.id === id);
+                    if (student) {
+                        student.absenteeism = res.absenteeism;
+                    }
+                    
+                    // Update stats
+                    updateStats();
+                    
+                    // Show success message
+                    const studentName = students.find(s => s.id === id)?.name || 'Öğrenci';
+                    
+                    let message = '';
+                    if (res.absenteeism >= 6) {
+                        message = `${studentName} devamsızlık sınırını aştı ve sertifika hakkını kaybetti!`;
+                    } else {
+                        message = `${studentName} için yoklama başarıyla kaydedildi! (${res.absenteeism}/6)`;
+                    }
+                    
+                    showToast(message, res.absenteeism >= 6 ? 'error' : 'success');
+                    
+                    // Add animation to card
+                    const card = document.getElementById(`card-${id}`);
+                    if (res.absenteeism >= 6) {
+                        card.style.backgroundColor = '#fff3f3';
+                        setTimeout(() => {
+                            card.style.backgroundColor = '';
+                        }, 1000);
+                    } else {
+                        card.style.backgroundColor = '#f0fff4';
+                        setTimeout(() => {
+                            card.style.backgroundColor = '';
+                        }, 500);
+                    }
+                }
+            } catch (error) {
+                showToast('Yoklama kaydedilirken bir hata oluştu!', 'error');
+                console.error('Error taking attendance:', error);
+            } finally {
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }
+        }
+
+        // Initialize when app is ready
+        window.addEventListener('pywebviewready', () => {
+            loadStudents();
+        });
+
+        // Debounce search input
+        let searchTimeout;
+        document.getElementById('search-input').addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(filterStudents, 300);
+        });
+    </script>
+</body>
+</html>

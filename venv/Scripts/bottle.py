@@ -1,4 +1,4 @@
-#!C:\Users\kayac\SmprTech\Haftasonu\ogrenciyonetimapp\EduFlow\venv\Scripts\python.exe
+#!C:\Users\kayac\Smartpro\EduFlow\venv\Scripts\python.exe
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 """
