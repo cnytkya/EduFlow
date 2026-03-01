@@ -18,7 +18,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -49,27 +49,147 @@
             font-size: 28px;
         }
 
-        .stats {
-            background: #f8f9fa;
+        .admin-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .admin-btn {
             padding: 10px 20px;
-            border-radius: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .admin-btn.primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .groups-panel {
+            background: white;
+            padding: 20px 30px;
+            border-bottom: 2px solid #f0f0f0;
             display: flex;
             gap: 30px;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
-        .stat-item {
-            text-align: center;
+        .groups-list {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            flex: 1;
         }
 
-        .stat-label {
-            font-size: 12px;
+        .group-tab {
+            padding: 8px 20px;
+            border-radius: 20px;
+            background: #f8f9fa;
             color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid transparent;
         }
 
-        .stat-value {
-            font-size: 20px;
+        .group-tab:hover {
+            background: #e9ecef;
+        }
+
+        .group-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .group-tab .group-count {
+            background: rgba(0,0,0,0.1);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .group-tab.active .group-count {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .add-group-btn {
+            padding: 8px 16px;
+            border: 2px dashed #667eea;
+            border-radius: 20px;
+            background: transparent;
+            color: #667eea;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s;
+        }
+
+        .add-group-btn:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .stats-container {
+            background: white;
+            padding: 20px 30px;
+            border-bottom: 2px solid #f0f0f0;
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            flex: 1;
+            min-width: 200px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .stat-info h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .stat-info .stat-value {
+            font-size: 24px;
             font-weight: 600;
             color: #333;
         }
@@ -165,6 +285,17 @@
             margin-bottom: 5px;
         }
 
+        .student-group-badge {
+            font-size: 12px;
+            padding: 3px 10px;
+            border-radius: 15px;
+            background: #e9ecef;
+            color: #495057;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
         .student-badges {
             display: flex;
             gap: 15px;
@@ -227,6 +358,11 @@
             color: #ffc107;
         }
 
+        .student-actions {
+            display: flex;
+            gap: 10px;
+        }
+
         .attendance-btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -249,14 +385,134 @@
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
-        .attendance-btn:active {
-            transform: translateY(0);
+        .edit-btn {
+            background: #f8f9fa;
+            color: #333;
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .attendance-btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
+        .edit-btn:hover {
+            background: #e9ecef;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+
+        .form-actions button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .form-actions button[type="submit"] {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .form-actions button[type="button"] {
+            background: #f8f9fa;
+            color: #333;
         }
 
         .toast {
@@ -305,11 +561,6 @@
             color: #e74c3c;
         }
 
-        .toast-message {
-            color: #333;
-            font-size: 14px;
-        }
-
         .loading {
             text-align: center;
             padding: 50px;
@@ -329,36 +580,40 @@
             margin-bottom: 15px;
         }
     </style>
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>
-                <i class="fas fa-graduation-cap"></i>
-                SmartPro Öğrenci Yoklama Sistemi
+                <i class="fas fa-cogs"></i>
+                SmartPro Admin Panel
             </h1>
-            <div class="stats" id="stats">
-                <div class="stat-item">
-                    <div class="stat-label">Toplam Öğrenci</div>
-                    <div class="stat-value" id="total-students">0</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">Sertifika Almaya Hak</div>
-                    <div class="stat-value" id="eligible-count">0</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">Süreç Devam Ediyor</div>
-                    <div class="stat-value" id="in-progress-count">0</div>
-                </div>
+            <div class="admin-actions">
+                <button class="admin-btn" onclick="showAddStudentModal()">
+                    <i class="fas fa-user-plus"></i>
+                    Öğrenci Ekle
+                </button>
+                <button class="admin-btn primary" onclick="showAddGroupModal()">
+                    <i class="fas fa-layer-group"></i>
+                    Yeni Grup
+                </button>
             </div>
+        </div>
+
+        <div class="groups-panel">
+            <div class="groups-list" id="groups-list">
+                <!-- Gruplar burada listelenecek -->
+            </div>
+        </div>
+
+        <div class="stats-container" id="stats-container">
+            <!-- İstatistikler burada dinamik olarak gösterilecek -->
         </div>
 
         <div class="student-grid">
             <div class="search-bar">
-                <input type="text" id="search-input" placeholder="Öğrenci ara..." onkeyup="filterStudents()">
-                <i class="fas fa-search" style="display: none;"></i>
+                <input type="text" id="search-input" placeholder="Öğrenci ara (isim veya grup)..." onkeyup="filterStudents()">
             </div>
 
             <div id="student-list"></div>
@@ -366,9 +621,69 @@
                 <i class="fas fa-spinner fa-spin"></i> Yükleniyor...
             </div>
             <div id="empty-state" class="empty-state" style="display: none;">
-                <i class="fas fa-user-graduate"></i>
-                <p>Henüz öğrenci bulunmuyor.</p>
+                <i class="fas fa-users-slash"></i>
+                <p>Gösterilecek öğrenci bulunmuyor.</p>
             </div>
+        </div>
+    </div>
+
+    <!-- Öğrenci Ekleme/Düzenleme Modal -->
+    <div id="studentModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Yeni Öğrenci Ekle</h2>
+                <button class="close-btn" onclick="closeModal('studentModal')">&times;</button>
+            </div>
+            <form id="studentForm" onsubmit="saveStudent(event)">
+                <input type="hidden" id="studentId">
+                <div class="form-group">
+                    <label>Öğrenci Adı Soyadı</label>
+                    <input type="text" id="studentName" required>
+                </div>
+                <div class="form-group">
+                    <label>Grup Seçimi</label>
+                    <select id="studentGroup" required>
+                        <option value="">Grup Seçin</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Başlangıç Devamsızlık</label>
+                    <input type="number" id="studentAbsenteeism" min="0" max="10" value="0" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" onclick="closeModal('studentModal')">İptal</button>
+                    <button type="submit">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Grup Ekleme/Düzenleme Modal -->
+    <div id="groupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="groupModalTitle">Yeni Grup Ekle</h2>
+                <button class="close-btn" onclick="closeModal('groupModal')">&times;</button>
+            </div>
+            <form id="groupForm" onsubmit="saveGroup(event)">
+                <input type="hidden" id="groupId">
+                <div class="form-group">
+                    <label>Grup Adı</label>
+                    <input type="text" id="groupName" placeholder="Örn: Python Sınıfı" required>
+                </div>
+                <div class="form-group">
+                    <label>Açıklama</label>
+                    <input type="text" id="groupDescription" placeholder="Örn: Temel Python Programlama">
+                </div>
+                <div class="form-group">
+                    <label>Devamsızlık Sınırı</label>
+                    <input type="number" id="groupAbsenceLimit" min="1" max="20" value="6" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" onclick="closeModal('groupModal')">İptal</button>
+                    <button type="submit">Kaydet</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -378,11 +693,46 @@
     </div>
 
     <script>
+        // Veri yapıları
+        let groups = [];
         let students = [];
         let filteredStudents = [];
+        let currentGroup = 'all'; // 'all' veya grup ID'si
 
-        function getCertificateStatus(absenteism) {
-            if (absenteism >= 6) {
+        // Örnek başlangıç verileri
+        const sampleGroups = [
+            { id: 1, name: 'Python Sınıfı', description: 'Temel Python Programlama', absenceLimit: 6, createdAt: new Date().toISOString() },
+            { id: 2, name: 'Full Stack Web', description: 'Full Stack Yazılım Uzmanlığı', absenceLimit: 8, createdAt: new Date().toISOString() },
+            { id: 3, name: 'Veri Bilimi', description: 'Veri Analizi ve Machine Learning', absenceLimit: 6, createdAt: new Date().toISOString() }
+        ];
+
+        const sampleStudents = [
+            { id: 1, name: 'Ahmet Yılmaz', groupId: 1, absenteeism: 2, createdAt: new Date().toISOString() },
+            { id: 2, name: 'Ayşe Demir', groupId: 1, absenteeism: 5, createdAt: new Date().toISOString() },
+            { id: 3, name: 'Mehmet Kaya', groupId: 2, absenteeism: 7, createdAt: new Date().toISOString() },
+            { id: 4, name: 'Zeynep Şahin', groupId: 2, absenteeism: 3, createdAt: new Date().toISOString() },
+            { id: 5, name: 'Ali Öztürk', groupId: 3, absenteeism: 4, createdAt: new Date().toISOString() }
+        ];
+
+        // Yardımcı fonksiyonlar
+        function getGroupById(groupId) {
+            return groups.find(g => g.id === groupId) || null;
+        }
+
+        function getGroupName(groupId) {
+            const group = getGroupById(groupId);
+            return group ? group.name : 'Grubu Yok';
+        }
+
+        function getGroupAbsenceLimit(groupId) {
+            const group = getGroupById(groupId);
+            return group ? group.absenceLimit : 6; // Varsayılan sınır
+        }
+
+        function getCertificateStatus(absenteism, groupId) {
+            const limit = getGroupAbsenceLimit(groupId);
+            
+            if (absenteism >= limit) {
                 return {
                     text: '✗ Hak Kazanamadı',
                     class: 'not-eligible',
@@ -402,11 +752,7 @@
             toast.className = `toast ${type}`;
             
             const icon = toast.querySelector('.toast-icon i');
-            if (type === 'success') {
-                icon.className = 'fas fa-check-circle';
-            } else {
-                icon.className = 'fas fa-exclamation-circle';
-            }
+            icon.className = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
             
             toast.querySelector('.toast-message').textContent = message;
             toast.style.display = 'flex';
@@ -420,29 +766,133 @@
             document.getElementById('loading').style.display = show ? 'block' : 'none';
         }
 
-        function updateStats() {
-            document.getElementById('total-students').textContent = students.length;
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Grup yönetimi fonksiyonları
+        function renderGroups() {
+            const groupsList = document.getElementById('groups-list');
             
-            // 6 ve üzeri devamsızlığı olanlar hak kazanamaz
-            const eligibleCount = students.filter(s => s.absenteeism < 6).length;
-            document.getElementById('eligible-count').textContent = eligibleCount;
+            let html = `
+                <div class="group-tab ${currentGroup === 'all' ? 'active' : ''}" onclick="filterByGroup('all')">
+                    <i class="fas fa-users"></i>
+                    Tüm Gruplar
+                    <span class="group-count">${students.length}</span>
+                </div>
+            `;
             
-            // Süreç devam edenler (devamsızlığı 6'dan az olanlar)
-            const inProgressCount = students.filter(s => s.absenteeism < 6).length;
-            document.getElementById('in-progress-count').textContent = inProgressCount;
+            groups.forEach(group => {
+                const groupStudentCount = students.filter(s => s.groupId === group.id).length;
+                html += `
+                    <div class="group-tab ${currentGroup === group.id ? 'active' : ''}" onclick="filterByGroup(${group.id})">
+                        <i class="fas fa-layer-group"></i>
+                        ${group.name}
+                        <span class="group-count">${groupStudentCount}</span>
+                    </div>
+                `;
+            });
+            
+            html += `
+                <button class="add-group-btn" onclick="showAddGroupModal()">
+                    <i class="fas fa-plus"></i>
+                    Grup Ekle
+                </button>
+            `;
+            
+            groupsList.innerHTML = html;
+        }
+
+        function renderStats() {
+            const statsContainer = document.getElementById('stats-container');
+            const activeGroup = currentGroup === 'all' ? null : groups.find(g => g.id === currentGroup);
+            
+            let filteredStats = students;
+            if (currentGroup !== 'all') {
+                filteredStats = students.filter(s => s.groupId === currentGroup);
+            }
+            
+            const totalStudents = filteredStats.length;
+            const eligibleCount = filteredStats.filter(s => {
+                const limit = getGroupAbsenceLimit(s.groupId);
+                return s.absenteeism < limit;
+            }).length;
+            
+            const notEligibleCount = filteredStats.filter(s => {
+                const limit = getGroupAbsenceLimit(s.groupId);
+                return s.absenteeism >= limit;
+            }).length;
+            
+            const averageAbsence = totalStudents > 0 
+                ? (filteredStats.reduce((sum, s) => sum + s.absenteeism, 0) / totalStudents).toFixed(1)
+                : 0;
+
+            statsContainer.innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Toplam Öğrenci</h3>
+                        <div class="stat-value">${totalStudents}</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Sertifika Almaya Hak</h3>
+                        <div class="stat-value">${eligibleCount}</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Hak Kaybeden</h3>
+                        <div class="stat-value">${notEligibleCount}</div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Ortalama Devamsızlık</h3>
+                        <div class="stat-value">${averageAbsence}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function filterByGroup(groupId) {
+            currentGroup = groupId;
+            renderGroups();
+            filterStudents();
+            renderStats();
         }
 
         function filterStudents() {
             const searchTerm = document.getElementById('search-input').value.toLowerCase();
             
-            if (searchTerm.trim() === '') {
-                filteredStudents = [...students];
-            } else {
-                filteredStudents = students.filter(s => 
-                    s.name.toLowerCase().includes(searchTerm)
+            let filtered = students;
+            
+            // Grup filtresi uygula
+            if (currentGroup !== 'all') {
+                filtered = filtered.filter(s => s.groupId === currentGroup);
+            }
+            
+            // Arama filtresi uygula
+            if (searchTerm.trim() !== '') {
+                filtered = filtered.filter(s => 
+                    s.name.toLowerCase().includes(searchTerm) ||
+                    getGroupName(s.groupId).toLowerCase().includes(searchTerm)
                 );
             }
             
+            filteredStudents = filtered;
             renderStudentList();
         }
 
@@ -458,7 +908,9 @@
             document.getElementById('empty-state').style.display = 'none';
             
             container.innerHTML = filteredStudents.map(s => {
-                const certStatus = getCertificateStatus(s.absenteeism);
+                const group = getGroupById(s.groupId);
+                const certStatus = getCertificateStatus(s.absenteeism, s.groupId);
+                const limit = getGroupAbsenceLimit(s.groupId);
                 
                 return `
                 <div class="student-card" id="card-${s.id}">
@@ -469,9 +921,13 @@
                         <div class="student-details">
                             <span class="student-name">${s.name}</span>
                             <div class="student-badges">
+                                <span class="student-group-badge">
+                                    <i class="fas fa-layer-group"></i>
+                                    ${group ? group.name : 'Grubu Yok'}
+                                </span>
                                 <span class="badge absent">
                                     <i class="fas fa-calendar-times"></i>
-                                    Devamsızlık: <span id="abs-${s.id}">${s.absenteeism}</span>
+                                    Devamsızlık: <span id="abs-${s.id}">${s.absenteeism}</span>/${limit}
                                 </span>
                                 <span id="cert-container-${s.id}" class="cert-status ${certStatus.class}">
                                     <i class="fas ${certStatus.icon}"></i>
@@ -480,29 +936,143 @@
                             </div>
                         </div>
                     </div>
-                    <button class="attendance-btn" onclick="takeAttendance(${s.id})">
-                        <i class="fas fa-user-check"></i>
-                        Yoklama Al
-                    </button>
+                    <div class="student-actions">
+                        <button class="attendance-btn" onclick="takeAttendance(${s.id})">
+                            <i class="fas fa-user-check"></i>
+                            Yoklama Al
+                        </button>
+                        <button class="edit-btn" onclick="editStudent(${s.id})">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
                 </div>
             `}).join('');
         }
 
-        async function loadStudents() {
-            showLoading(true);
-            try {
-                students = await pywebview.api.get_students();
-                filteredStudents = [...students];
-                updateStats();
-                renderStudentList();
-            } catch (error) {
-                showToast('Öğrenciler yüklenirken bir hata oluştu!', 'error');
-                console.error('Error loading students:', error);
-            } finally {
-                showLoading(false);
-            }
+        // Öğrenci işlemleri
+        function showAddStudentModal() {
+            document.getElementById('modalTitle').textContent = 'Yeni Öğrenci Ekle';
+            document.getElementById('studentId').value = '';
+            document.getElementById('studentName').value = '';
+            document.getElementById('studentAbsenteeism').value = '0';
+            
+            // Grup seçeneklerini doldur
+            const groupSelect = document.getElementById('studentGroup');
+            groupSelect.innerHTML = '<option value="">Grup Seçin</option>' + 
+                groups.map(g => `<option value="${g.id}">${g.name}</option>`).join('');
+            
+            document.getElementById('studentModal').classList.add('active');
         }
 
+        function editStudent(id) {
+            const student = students.find(s => s.id === id);
+            if (!student) return;
+            
+            document.getElementById('modalTitle').textContent = 'Öğrenci Düzenle';
+            document.getElementById('studentId').value = student.id;
+            document.getElementById('studentName').value = student.name;
+            document.getElementById('studentAbsenteeism').value = student.absenteeism;
+            
+            const groupSelect = document.getElementById('studentGroup');
+            groupSelect.innerHTML = '<option value="">Grup Seçin</option>' + 
+                groups.map(g => `<option value="${g.id}" ${g.id === student.groupId ? 'selected' : ''}>${g.name}</option>`).join('');
+            
+            document.getElementById('studentModal').classList.add('active');
+        }
+
+        function saveStudent(event) {
+            event.preventDefault();
+            
+            const id = document.getElementById('studentId').value;
+            const name = document.getElementById('studentName').value;
+            const groupId = parseInt(document.getElementById('studentGroup').value);
+            const absenteeism = parseInt(document.getElementById('studentAbsenteeism').value);
+            
+            if (id) {
+                // Güncelleme
+                const index = students.findIndex(s => s.id === parseInt(id));
+                if (index !== -1) {
+                    students[index] = { ...students[index], name, groupId, absenteeism };
+                    showToast('Öğrenci başarıyla güncellendi!');
+                }
+            } else {
+                // Yeni ekleme
+                const newId = Math.max(...students.map(s => s.id), 0) + 1;
+                students.push({
+                    id: newId,
+                    name,
+                    groupId,
+                    absenteeism,
+                    createdAt: new Date().toISOString()
+                });
+                showToast('Öğrenci başarıyla eklendi!');
+            }
+            
+            closeModal('studentModal');
+            renderGroups();
+            renderStats();
+            filterStudents();
+        }
+
+        // Grup işlemleri
+        function showAddGroupModal() {
+            document.getElementById('groupModalTitle').textContent = 'Yeni Grup Ekle';
+            document.getElementById('groupId').value = '';
+            document.getElementById('groupName').value = '';
+            document.getElementById('groupDescription').value = '';
+            document.getElementById('groupAbsenceLimit').value = '6';
+            
+            document.getElementById('groupModal').classList.add('active');
+        }
+
+        function editGroup(id) {
+            const group = groups.find(g => g.id === id);
+            if (!group) return;
+            
+            document.getElementById('groupModalTitle').textContent = 'Grup Düzenle';
+            document.getElementById('groupId').value = group.id;
+            document.getElementById('groupName').value = group.name;
+            document.getElementById('groupDescription').value = group.description || '';
+            document.getElementById('groupAbsenceLimit').value = group.absenceLimit;
+            
+            document.getElementById('groupModal').classList.add('active');
+        }
+
+        function saveGroup(event) {
+            event.preventDefault();
+            
+            const id = document.getElementById('groupId').value;
+            const name = document.getElementById('groupName').value;
+            const description = document.getElementById('groupDescription').value;
+            const absenceLimit = parseInt(document.getElementById('groupAbsenceLimit').value);
+            
+            if (id) {
+                // Güncelleme
+                const index = groups.findIndex(g => g.id === parseInt(id));
+                if (index !== -1) {
+                    groups[index] = { ...groups[index], name, description, absenceLimit };
+                    showToast('Grup başarıyla güncellendi!');
+                }
+            } else {
+                // Yeni ekleme
+                const newId = Math.max(...groups.map(g => g.id), 0) + 1;
+                groups.push({
+                    id: newId,
+                    name,
+                    description,
+                    absenceLimit,
+                    createdAt: new Date().toISOString()
+                });
+                showToast('Grup başarıyla eklendi!');
+            }
+            
+            closeModal('groupModal');
+            renderGroups();
+            renderStats();
+            filterStudents();
+        }
+
+        // Yoklama işlemi
         async function takeAttendance(id) {
             const button = event.target.closest('button');
             const originalText = button.innerHTML;
@@ -511,58 +1081,57 @@
             button.disabled = true;
 
             try {
-                const res = await pywebview.api.mark_attendance(id);
+                // Öğrenciyi bul
+                const student = students.find(s => s.id === id);
+                if (!student) return;
                 
-                if (res.success) {
-                    // Update UI
-                    document.getElementById(`abs-${id}`).innerText = res.absenteeism;
-                    
-                    // Update certificate status based on new absenteeism
-                    const certStatus = getCertificateStatus(res.absenteeism);
-                    const certContainer = document.getElementById(`cert-container-${id}`);
-                    const certSpan = document.getElementById(`cert-${id}`);
-                    
-                    certContainer.className = `cert-status ${certStatus.class}`;
-                    certContainer.innerHTML = `
-                        <i class="fas ${certStatus.icon}"></i>
-                        <span id="cert-${id}">${certStatus.text}</span>
-                    `;
-                    
-                    // Update student data
-                    const student = students.find(s => s.id === id);
-                    if (student) {
-                        student.absenteeism = res.absenteeism;
-                    }
-                    
-                    // Update stats
-                    updateStats();
-                    
-                    // Show success message
-                    const studentName = students.find(s => s.id === id)?.name || 'Öğrenci';
-                    
-                    let message = '';
-                    if (res.absenteeism >= 6) {
-                        message = `${studentName} devamsızlık sınırını aştı ve sertifika hakkını kaybetti!`;
-                    } else {
-                        message = `${studentName} için yoklama başarıyla kaydedildi! (${res.absenteeism}/6)`;
-                    }
-                    
-                    showToast(message, res.absenteeism >= 6 ? 'error' : 'success');
-                    
-                    // Add animation to card
-                    const card = document.getElementById(`card-${id}`);
-                    if (res.absenteeism >= 6) {
-                        card.style.backgroundColor = '#fff3f3';
-                        setTimeout(() => {
-                            card.style.backgroundColor = '';
-                        }, 1000);
-                    } else {
-                        card.style.backgroundColor = '#f0fff4';
-                        setTimeout(() => {
-                            card.style.backgroundColor = '';
-                        }, 500);
-                    }
+                // Devamsızlığı artır
+                student.absenteeism += 1;
+                
+                // UI'ı güncelle
+                document.getElementById(`abs-${id}`).innerText = student.absenteeism;
+                
+                // Sertifika durumunu güncelle
+                const certStatus = getCertificateStatus(student.absenteeism, student.groupId);
+                const certContainer = document.getElementById(`cert-container-${id}`);
+                const certSpan = document.getElementById(`cert-${id}`);
+                
+                certContainer.className = `cert-status ${certStatus.class}`;
+                certContainer.innerHTML = `
+                    <i class="fas ${certStatus.icon}"></i>
+                    <span id="cert-${id}">${certStatus.text}</span>
+                `;
+                
+                // İstatistikleri güncelle
+                renderStats();
+                
+                // Bildirim göster
+                const group = getGroupById(student.groupId);
+                const limit = group ? group.absenceLimit : 6;
+                
+                let message = '';
+                if (student.absenteeism >= limit) {
+                    message = `${student.name} devamsızlık sınırını aştı ve sertifika hakkını kaybetti!`;
+                } else {
+                    message = `${student.name} için yoklama başarıyla kaydedildi! (${student.absenteeism}/${limit})`;
                 }
+                
+                showToast(message, student.absenteeism >= limit ? 'error' : 'success');
+                
+                // Animasyon ekle
+                const card = document.getElementById(`card-${id}`);
+                if (student.absenteeism >= limit) {
+                    card.style.backgroundColor = '#fff3f3';
+                    setTimeout(() => {
+                        card.style.backgroundColor = '';
+                    }, 1000);
+                } else {
+                    card.style.backgroundColor = '#f0fff4';
+                    setTimeout(() => {
+                        card.style.backgroundColor = '';
+                    }, 500);
+                }
+                
             } catch (error) {
                 showToast('Yoklama kaydedilirken bir hata oluştu!', 'error');
                 console.error('Error taking attendance:', error);
@@ -572,10 +1141,18 @@
             }
         }
 
-        // Initialize when app is ready
-        window.addEventListener('pywebviewready', () => {
-            loadStudents();
-        });
+        // Başlangıç yükleme
+        function initializeData() {
+            groups = [...sampleGroups];
+            students = [...sampleStudents];
+            
+            renderGroups();
+            renderStats();
+            filterStudents();
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', initializeData);
 
         // Debounce search input
         let searchTimeout;
@@ -583,6 +1160,13 @@
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout(filterStudents, 300);
         });
+
+        // Modal dışına tıklandığında kapat
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
     </script>
 </body>
 </html>
